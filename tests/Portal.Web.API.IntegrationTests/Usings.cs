@@ -1,0 +1,1 @@
+﻿global using Portal.Web.API.IntegrationTests.Configs;
