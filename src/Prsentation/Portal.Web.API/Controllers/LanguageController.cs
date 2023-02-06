@@ -17,6 +17,12 @@ public class LanguageController : BaseController
     [HttpPut("{id}")]
     public async Task<IActionResult> Edit(long id, EditLanguageDto lan)
     {
-        return Ok(await Mediator.EditLanguage(id,lan));
+        return Ok(await Mediator.EditLanguage(id, lan));
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Remove(long id)
+    {
+        return Ok(await Mediator.RemoveLanguage(id));
     }
 }

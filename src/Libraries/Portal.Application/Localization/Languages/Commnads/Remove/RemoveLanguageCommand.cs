@@ -1,5 +1,7 @@
-﻿namespace Portal.Application.Localization.Languages.Commnads.Remove;
+﻿
+namespace Portal.Application.Localization.Languages.Commnads.Remove;
 
-internal class RemoveLanguageCommand
+public class RemoveLanguageCommand : BaseCommand<long>
 {
+    public long Id { get; set; }
 }

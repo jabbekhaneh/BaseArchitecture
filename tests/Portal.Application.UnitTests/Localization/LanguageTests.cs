@@ -67,8 +67,8 @@ public class LanguageTests : BaseApplicationTestConfiguration
         var editLanguage = new EditLanguageDtoTestBuilder().Build();
 
         //act
-        await _repository.EditLanguageHandler(language.Id,editLanguage);
-        
+        await _repository.EditLanguageHandler(language.Id, editLanguage);
+
         //assert
 
         var expected = DatabaseInMemory.Languages.Find(language.Id);
@@ -77,4 +77,22 @@ public class LanguageTests : BaseApplicationTestConfiguration
         expected.IsRtl.Should().Be(editLanguage.IsRtl);
     }
 
+    [Fact]
+    public async Task Remove_Language_Should_NotFound_Language()
+    {
+        //arrange
+
+        var language = new LanguageTestBuilder().Build();
+        DatabaseInMemory.AddLanguage(language);
+
+        //act
+
+        var actual = await _repository.RemoveLanguageHandler(language.Id);
+        DatabaseInMemory.SaveChanges();
+
+        //assert
+
+        var expected = DatabaseInMemory.Languages.FirstOrDefault(_ => _.Id == actual.Result);
+        expected.Should().BeNull();
+    }
 }

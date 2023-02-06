@@ -12,6 +12,8 @@ internal class LanguageConfigs : IEntityTypeConfiguration<Language>
 
         builder.Property(_ => _.Name).IsRequired().HasMaxLength(250);
         builder.Property(_=>_.Title).IsRequired().HasMaxLength(10);
+
+        builder.HasQueryFilter(_ => _.IsDeleted);
         
     }
 }

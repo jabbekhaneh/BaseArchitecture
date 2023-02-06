@@ -1,5 +1,6 @@
 ﻿using Portal.Application.Localization.Languages.Add;
 using Portal.Application.Localization.Languages.Commnads.Edit;
+using Portal.Application.Localization.Languages.Commnads.Remove;
 using Portal.Base.Common;
 using Portal.Domain.Localization;
 using Portal.Infrastructure.Persistence;
@@ -39,6 +40,17 @@ public static class LanguageExtentions
         var handler = new EditLanguageCommnadHandler(repository);
         return await handler.Handle(request, CancellationToken.None);
         
+    }
+
+    public static async Task<BaseResult<long>> RemoveLanguageHandler(this BaseLanguageRepository repository, long languageId)
+    {
+        var request = new RemoveLanguageCommand
+        {
+            Id = languageId,
+        };
+        var handler = new RemoveLanguageCommandHandler(repository);
+        return await handler.Handle(request, CancellationToken.None);
+
     }
 }
 
